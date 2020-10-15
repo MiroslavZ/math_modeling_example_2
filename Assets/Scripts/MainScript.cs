@@ -11,9 +11,11 @@ public class MainScript : MonoBehaviour
     int[] prices =new int[] { 20, 30, 40, 50 };
     public GameObject[] chipsPacks;
     public GameObject money;
-    public Transform target;
+    public Transform ProductTargetDrop;
+    public Transform MoneyTargetDrop;
     public InputField input;
     public Text infoStatus;
+    public GameObject[] chipsButtons;
 
     private void Awake()
     {
@@ -57,20 +59,21 @@ public class MainScript : MonoBehaviour
 
     public void ChoseProduct1()
     {
+        chipsButtons[0].GetComponent<Animator>().SetTrigger("Pressed");
         if (currentState == 1)
         {
             if (int.Parse(input.text) > prices[0])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 1, выдача сдачи";
-                GenerateChips(chipsPacks[0], target);
+                GenerateChips(chipsPacks[0], ProductTargetDrop);
                 StartCoroutine(ReturnMoney());
             }
             else if (int.Parse(input.text) == prices[0])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 1";
-                GenerateChips(chipsPacks[0], target);
+                GenerateChips(chipsPacks[0], ProductTargetDrop);
             }
             else
             {
@@ -85,20 +88,21 @@ public class MainScript : MonoBehaviour
 
     public void ChoseProduct2()
     {
+        chipsButtons[1].GetComponent<Animator>().SetTrigger("Pressed");
         if (currentState == 1)
         {
             if (int.Parse(input.text) > prices[1])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 2, выдача сдачи";
-                GenerateChips(chipsPacks[1], target);
+                GenerateChips(chipsPacks[1], ProductTargetDrop);
                 StartCoroutine(ReturnMoney());
             }
             else if (int.Parse(input.text) == prices[1])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 2";
-                GenerateChips(chipsPacks[1], target);
+                GenerateChips(chipsPacks[1], ProductTargetDrop);
             }
             else
             {
@@ -113,20 +117,21 @@ public class MainScript : MonoBehaviour
 
     public void ChoseProduct3()
     {
+        chipsButtons[2].GetComponent<Animator>().SetTrigger("Pressed");
         if (currentState == 1)
         {
             if (int.Parse(input.text) > prices[2])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 3, выдача сдачи";
-                GenerateChips(chipsPacks[2], target);
+                GenerateChips(chipsPacks[2], ProductTargetDrop);
                 StartCoroutine(ReturnMoney());
             }
             else if(int.Parse(input.text) == prices[2])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 3";
-                GenerateChips(chipsPacks[2], target);
+                GenerateChips(chipsPacks[2], ProductTargetDrop);
             }
             else
             {
@@ -141,20 +146,21 @@ public class MainScript : MonoBehaviour
 
     public void ChoseProduct4()
     {
+        chipsButtons[3].GetComponent<Animator>().SetTrigger("Pressed");
         if (currentState == 1)
         {
             if (int.Parse(input.text) > prices[3])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 4, выдача сдачи";
-                GenerateChips(chipsPacks[3], target);
+                GenerateChips(chipsPacks[3], ProductTargetDrop);
                 StartCoroutine(ReturnMoney());
             }
             else if (int.Parse(input.text) == prices[3])
             {
                 currentState = 6;
                 infoStatus.text = "выдача товара 4";
-                GenerateChips(chipsPacks[3], target);
+                GenerateChips(chipsPacks[3], ProductTargetDrop);
             }
             else
             {
@@ -191,6 +197,7 @@ public class MainScript : MonoBehaviour
 
     public void TurnToStartState()
     {
+        input.text = "0";
         infoStatus.text = "у вас на счету 0 рублей";
     }
 
@@ -199,9 +206,8 @@ public class MainScript : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(0.25f);
-            Instantiate(money, target.position, Quaternion.identity);
-            Debug.Log("Returning Money!!!");
-            
+            Instantiate(money, MoneyTargetDrop.position, Quaternion.identity);
+            Debug.Log("Returning Money!!!");        
         }
     }
 
